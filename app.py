@@ -41,6 +41,33 @@ if st.button("診断を実行"):
     
     st.success(final_result)
 
+import streamlit as st
+
+# CSSを適用
+st.markdown("""
+    <style>
+    .custom-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 24px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .custom-text {
+        font-size: 24px;
+        color: #ff4b4b;
+        font-weight: bold;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# カスタムスタイルを適用
+st.markdown('<p class="custom-text">カスタムテキスト</p>', unsafe_allow_html=True)
+st.markdown('<button class="custom-button">カスタムボタン</button>', unsafe_allow_html=True)
+
+
 st.markdown("""
     <style>
     body {
