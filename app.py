@@ -41,12 +41,17 @@ if st.button("診断を実行"):
     
     st.success(final_result)
 
-import streamlit as st
-
 # CSSを適用
 st.markdown("""
     <style>
-    .custom-button {
+    /* Streamlit全体の背景色とフォント */
+    .stApp {
+        background-color: #f5f5f5;
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* カスタムボタン */
+    div.stButton > button {
         background-color: #4CAF50;
         color: white;
         padding: 10px 24px;
@@ -55,6 +60,15 @@ st.markdown("""
         cursor: pointer;
         font-size: 16px;
     }
+
+    /* 入力フォームのカスタマイズ */
+    input {
+        border: 2px solid #4CAF50;
+        border-radius: 5px;
+        padding: 5px;
+    }
+
+    /* カスタムテキスト */
     .custom-text {
         font-size: 24px;
         color: #ff4b4b;
@@ -65,19 +79,4 @@ st.markdown("""
 
 # カスタムスタイルを適用
 st.markdown('<p class="custom-text">カスタムテキスト</p>', unsafe_allow_html=True)
-st.markdown('<button class="custom-button">カスタムボタン</button>', unsafe_allow_html=True)
-
-
-st.markdown("""
-    <style>
-    body {
-        background-color: #f5f5f5;
-        font-family: 'Arial', sans-serif;
-    }
-    .stTextInput > div > div > input {
-        border: 2px solid #4CAF50;
-        border-radius: 5px;
-        padding: 5px;
-    }
-    </style>
-""", unsafe_allow_html=True)
+st.button("カスタムボタン")
