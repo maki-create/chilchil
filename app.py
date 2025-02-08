@@ -76,7 +76,3 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-
-# カスタムスタイルを適用
-st.markdown('<p class="custom-text">カスタムテキスト</p>', unsafe_allow_html=True)
-st.button("カスタムボタン")
