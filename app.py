@@ -40,3 +40,17 @@ if st.button("診断を実行"):
     final_result = f"あなたの診断結果は: {result_I_E}{result_S_N}{result_T_F}{result_J_P} です！"
     
     st.success(final_result)
+
+st.markdown("""
+    <style>
+    body {
+        background-color: #f5f5f5;
+        font-family: 'Arial', sans-serif;
+    }
+    .stTextInput > div > div > input {
+        border: 2px solid #4CAF50;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    </style>
+""", unsafe_allow_html=True)
