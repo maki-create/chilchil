@@ -1,0 +1,13 @@
+st.markdown("""
+    <style>
+    body {
+        background-color: #f5f5f5;
+        font-family: 'Arial', sans-serif;
+    }
+    .stTextInput > div > div > input {
+        border: 2px solid #4CAF50;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    </style>
+""", unsafe_allow_html=True)
