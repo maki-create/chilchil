@@ -1,5 +1,16 @@
 import streamlit as st
 
+# CSSでラジオボタンを横並びにする
+st.markdown("""
+    <style>
+    div[data-testid="stRadio"] > div {
+        display: flex;
+        justify-content: space-evenly;
+        gap: 10px;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # スコア計算関数
 def calculate_result(answers, label1, label2):
     score1 = sum(1 for ans in answers if ans == '〇')
@@ -14,65 +25,32 @@ def calculate_result(answers, label1, label2):
 
 # Streamlit UI
 st.title("性格診断アプリ")
-
 st.write("各質問に対して「〇」または「×」を選んでください。")
 
-# ユーザーの回答を取得
-questions = [
-    ("質問 1", "質問 2", "質問 3"),
-    ("質問 4", "質問 5", "質問 6"),
-    ("質問 7", "質問 8", "質問 9"),
-    ("質問 10", "質問 11", "質問 12"),
-]
+# 質問データ
+categories = {
+    "自己分析": ["質問 1", "質問 2", "質問 3"],
+    "他者との関係": ["質問 4", "質問 5", "質問 6"],
+    "職業適性": ["質問 7", "質問 8", "質問 9"],
+    "ライフスタイル": ["質問 10", "質問 11", "質問 12"]
+}
 
 responses = []
-for i, group in enumerate(questions):
-    st.subheader(f"カテゴリー {i+1}")
-    group_responses = [st.radio(q, ["〇", "×"], key=f"q{i}{j}") for j, q in enumerate(group)]
-    responses.append(group_responses)
+
+for category, questions in categories.items():
+    st.subheader(f"{category}")
+    for q in questions:
+        response = st.radio(f"**{q}**", ["〇", "×"], key=f"{category}_{q}")
+        responses.append(response)
 
 if st.button("診断を実行"):
-    result_I_E = calculate_result(responses[0], "I", "E")
-    result_S_N = calculate_result(responses[1], "S", "N")
-    result_T_F = calculate_result(responses[2], "T", "F")
-    result_J_P = calculate_result(responses[3], "J", "P")
+    result_I_E = calculate_result(responses[0:3], "I", "E")
+    result_S_N = calculate_result(responses[3:6], "S", "N")
+    result_T_F = calculate_result(responses[6:9], "T", "F")
+    result_J_P = calculate_result(responses[9:12], "J", "P")
 
-    final_result = f"あなたの診断結果は: {result_I_E}{result_S_N}{result_T_F}{result_J_P} です！"
-    
-    st.success(final_result)
+    final_result = f"{result_I_E}{result_S_N}{result_T_F}{result_J_P}"
+    st.session_state["final_result"] = final_result
 
-# CSSを適用
-st.markdown("""
-    <style>
-    /* Streamlit全体の背景色とフォント */
-    .stApp {
-        background-color: #f5f5f5;
-        font-family: 'Arial', sans-serif;
-    }
-
-    /* カスタムボタン */
-    div.stButton > button {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 24px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    /* 入力フォームのカスタマイズ */
-    input {
-        border: 2px solid #4CAF50;
-        border-radius: 5px;
-        padding: 5px;
-    }
-
-    /* カスタムテキスト */
-    .custom-text {
-        font-size: 24px;
-        color: #ff4b4b;
-        font-weight: bold;
-    }
-    </style>
-""", unsafe_allow_html=True)
+    # 診断結果のページに遷移
+    st.switch_page(f"pages/{final_result}.py")
