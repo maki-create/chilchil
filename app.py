@@ -53,4 +53,4 @@ if st.button("診断を実行"):
     st.session_state["final_result"] = final_result
 
     # 診断結果のページに遷移
-    st.switch_page(f"pages/{final_result}.py")
+    st.switch_page("{final_result}.py")
